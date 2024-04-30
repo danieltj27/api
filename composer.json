@@ -1,0 +1,30 @@
+{
+    "name": "danieltj/api",
+    "type": "phpbb-extension",
+    "description": "An unofficial API for the phpBB platform.",
+    "version": "0.1.0",
+    "license": "GPL-2.0-only",
+    "authors": [
+        {
+            "name": "Daniel James",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=7.0",
+        "composer/installers": "~1.0.0",
+        "phpbb/phpbb": ">=3.3.0"
+    },
+    "extra": {
+        "display-name": "API",
+        "soft-require": {
+            "phpbb/phpbb": ">=3.3.11"
+        },
+        "version-check": {
+            "host": "www.phpbb.com",
+            "directory": "/customise/db/extension/api",
+            "filename": "version_check",
+            "ssl": true
+        }
+    }
+}
