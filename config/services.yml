@@ -1,0 +1,16 @@
+services:
+    danieltj.api.controller:
+        class: danieltj\api\controller\main
+        arguments:
+            - '@config'
+            - '@controller.helper'
+            - '@language'
+            - '@template'
+
+    danieltj.api.listener:
+        class: danieltj\api\event\listener
+        arguments:
+            - '@controller.helper'
+            - '@template'
+        tags:
+            - { name: event.listener }

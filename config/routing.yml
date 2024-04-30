@@ -1,0 +1,3 @@
+danieltj_api_default_route:
+    path: /api/v1/default
+    defaults: { _controller: danieltj.api.controller:handle }
