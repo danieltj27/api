@@ -52,16 +52,48 @@ class core {
     }
 
     /**
-     * Test method for default route.
+     * Default API method.
+     * 
+     * Lists all endpoints that are currently supported.
+     * Does not authenticate user permissions.
      *
      * @throws \phpbb\exception\http_exception
      * @return \Symfony\Component\HttpFoundation\Response A Symfony Response object
      */
-    public function endpoint() {
+    public function default() {
 
         $response = [
-            'message' => $this->language->lang( 'DEFAULT_API_GREETING' ),
-            'status' => 200
+            'message'   => $this->language->lang( 'DEFAULT_API_RESPONSE' ),
+            'status'    => 200,
+            'routes'    => [
+                '/api/v1/auth',
+                '/api/v1/users/{user_id}'
+            ]
+        ];
+
+        return new JsonResponse( $response, 200 );
+
+    }
+
+    /**
+     * User authentication method.
+     * 
+     * This method is used to create (or update) a user's API key
+     * which allow them to use the rest of the API without
+     * using their username and password combination.
+     *
+     * @throws \phpbb\exception\http_exception
+     * @return \Symfony\Component\HttpFoundation\Response A Symfony Response object
+     */
+    public function auth() {
+
+        /**
+         * @todo receieve user/pass to create new key or take existing key and update to a new one
+         */
+
+        $response = [
+            'message'   => $this->language->lang( 'DEFAULT_API_RESPONSE' ),
+            'status'    => 200
         ];
 
         return new JsonResponse( $response, 200 );

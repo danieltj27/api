@@ -8,6 +8,8 @@
 
 namespace danieltj\api\event;
 
+use phpbb\controller\helper;
+
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class listener implements EventSubscriberInterface {
@@ -18,20 +20,13 @@ class listener implements EventSubscriberInterface {
     protected $helper;
 
     /**
-     * @var \phpbb\template\template
-     */
-    protected $template;
-
-    /**
      * Constructor
      *
      * @param \phpbb\controller\helper $helper
-     * @param \phpbb\template\template $template
      */
-    public function __construct(\phpbb\controller\helper $helper, \phpbb\template\template $template) {
+    public function __construct( helper $helper ) {
 
         $this->helper   = $helper;
-        $this->template = $template;
 
     }
 

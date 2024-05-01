@@ -56,6 +56,34 @@ class users {
     }
 
     /**
+     * Authenticate an API key.
+     * 
+     * @todo need to think about api key security and hashing
+     * 
+     * @param string $api_key
+     * @return boolean
+     */
+    private function _validate_api_key( $api_key = '' ) {
+
+        $sql = 'SELECT user_api_key FROM ' . USERS_TABLE . ' WHERE ' . $this->database->sql_build_array( 'SELECT', [
+            'user_api_key' => $api_key
+        ] );
+
+        $result = $this->database->sql_query( $sql );
+        $user = $this->database->sql_fetchrow( $result );
+        $this->database->sql_freeresult( $result );
+
+        if ( NULL === $user ) {
+
+            return false;
+
+        }
+
+        return true;
+
+    }
+
+    /**
      * Fetch selected user.
      * 
      * @param integer $user_id
