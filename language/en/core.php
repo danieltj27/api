@@ -19,5 +19,6 @@ if ( empty( $lang ) || ! is_array( $lang ) ) {
 }
 
 $lang = array_merge( $lang, [
-    'DEFAULT_API_RESPONSE'  => 'Connection established to the API.',
+    'DEFAULT_API_RESPONSE'          => 'Connection established to the API.',
+    'INACTIVE_ENDPOINT_RESPONSE'    => 'Endpoint is inactive, please do not use.',
 ] );

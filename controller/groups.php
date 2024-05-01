@@ -11,7 +11,7 @@ namespace danieltj\api\controller;
 use \Symfony\Component\HttpFoundation\Response as Response;
 use \Symfony\Component\HttpFoundation\JsonResponse as JsonResponse;
 
-class main {
+class groups {
 
     /**
      * @var \phpbb\config\config
@@ -45,7 +45,7 @@ class main {
     }
 
     /**
-     * Test method for default route.
+     * Response method for `Users` endpoint.
      *
      * @throws \phpbb\exception\http_exception
      * @return \Symfony\Component\HttpFoundation\Response A Symfony Response object
@@ -53,7 +53,7 @@ class main {
     public function handle() {
 
         $response = [
-            'message' => $this->language->lang( 'DEFAULT_API_RESPONSE' ),
+            'message' => $this->language->lang( 'INACTIVE_ENDPOINT_RESPONSE' ),
             'status' => 200
         ];
 

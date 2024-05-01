@@ -5,7 +5,12 @@ services:
             - '@config'
             - '@controller.helper'
             - '@language'
-            - '@template'
+    danieltj.api.controller:
+        class: danieltj\api\controller\users
+        arguments:
+            - '@config'
+            - '@controller.helper'
+            - '@language'
 
     danieltj.api.listener:
         class: danieltj\api\event\listener
