@@ -1,3 +1,7 @@
 danieltj_api_default_route:
-    path: /api/v1/default
-    defaults: { _controller: danieltj.api.controller:handle }
+    path: /api/v1/hello
+    defaults: { _controller: danieltj.api.controller:endpoint }
+
+danieltj_api_users_route:
+    path: /api/v1/users/{user_id}
+    defaults: { _controller: danieltj.api.controller.users:endpoint, user_id: 0 }

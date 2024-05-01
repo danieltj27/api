@@ -1,14 +1,17 @@
 services:
     danieltj.api.controller:
-        class: danieltj\api\controller\main
+        class: danieltj\api\controller\core
         arguments:
             - '@config'
+            - '@dbal.conn'
             - '@controller.helper'
             - '@language'
-    danieltj.api.controller:
+
+    danieltj.api.controller.users:
         class: danieltj\api\controller\users
         arguments:
             - '@config'
+            - '@dbal.conn'
             - '@controller.helper'
             - '@language'
 
