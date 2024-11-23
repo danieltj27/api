@@ -3,61 +3,95 @@
 /**
  * @package API
  * @copyright (c) 2024 Daniel James
- * @license http://opensource.org/licenses/gpl-license.php GNU Public License
+ * @license https://opensource.org/license/gpl-2-0
  */
 
 namespace danieltj\api\event;
 
-use phpbb\controller\helper;
-
+use phpbb\auth\auth;
+use phpbb\request\request;
+use phpbb\template\template;
+use phpbb\language\language;
+use phpbb\user;
+use danieltj\api\includes\functions;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class listener implements EventSubscriberInterface {
 
-    /**
-     * @var \phpbb\controller\helper
-     */
-    protected $helper;
+	/**
+	 * @var auth
+	 */
+	protected $auth;
 
-    /**
-     * Constructor
-     *
-     * @param \phpbb\controller\helper $helper
-     */
-    public function __construct( helper $helper ) {
+	/**
+	 * @var request
+	 */
+	protected $request;
 
-        $this->helper   = $helper;
+	/**
+	 * @var template
+	 */
+	protected $template;
 
-    }
+	/**
+	 * @var language
+	 */
+	protected $language;
 
-    /**
-     * Assign functions defined in this class to event listeners in the core
-     *
-     * @return array
-     */
-    static public function getSubscribedEvents() {
+	/**
+	 * @var user
+	 */
+	protected $user;
 
-        return [
-            'core.user_setup'  => 'load_languages',
-        ];
+	/**
+	 * @var functions
+	 */
+	protected $functions;
 
-    }
+	/**
+	 * Constructor
+	 */
+	public function __construct( auth $auth, request $request, template $template, language $language, user $user, functions $functions ) {
 
-    /**
-     * Load the Acme Demo language file
-     *     acme/demo/language/en/demo.php
-     *
-     * @param \phpbb\event\data $event The event object
-     */
-    public function load_languages( $event ) {
+		$this->auth = $auth;
+		$this->request = $request;
+		$this->template = $template;
+		$this->language = $language;
+		$this->user = $user;
+		$this->functions = $functions;
 
-        $lang_set_ext = $event['lang_set_ext'];
-        $lang_set_ext[] = [
-            'ext_name' => 'danieltj/api',
-            'lang_set' => 'core',
-        ];
-        $event[ 'lang_set_ext' ] = $lang_set_ext;
+	}
 
-    }
+	/**
+	 * Register Events
+	 */
+	static public function getSubscribedEvents() {
+
+		return [
+			'core.user_setup'		=> 'add_languages',
+			'core.permissions'		=> 'add_permissions',
+		];
+
+	}
+
+	/**
+	 * Add Languages
+	 */
+	public function add_languages( $event ) {
+
+		$this->language->add_lang( [
+			'api', 'common', 'ucp'
+		], 'danieltj/api' );
+
+	}
+
+	/**
+	 * Add Permissions
+	 */
+	public function add_permissions( $event ) {
+
+		$event->update_subarray( 'permissions', 'u_use_api_resource', [ 'lang' => 'ACL_U_USE_API_RESOURCE', 'cat' => 'misc' ] );
+
+	}
 
 }

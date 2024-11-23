@@ -1,0 +1,2 @@
+parameters:
+    danieltj.api.tables.passwords: '%core.table_prefix%app_passwords'

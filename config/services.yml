@@ -1,24 +1,42 @@
-services:
-    danieltj.api.controller:
-        class: danieltj\api\controller\core
-        arguments:
-            - '@config'
-            - '@dbal.conn'
-            - '@controller.helper'
-            - '@language'
+imports:
+    - { resource: tables.yml }
 
-    danieltj.api.controller.users:
-        class: danieltj\api\controller\users
+services:
+    danieltj.api.controller.api:
+        class: danieltj\api\controller\api
         arguments:
-            - '@config'
-            - '@dbal.conn'
-            - '@controller.helper'
+            - '@auth'
+            - '@request'
+            - '@template'
             - '@language'
+            - '@user'
+            - '@danieltj.api.includes.functions'
+
+    danieltj.api.controller.ucp:
+        class: danieltj\api\controller\ucp
+        arguments:
+            - '@service_container'
+            - '@dispatcher'
+            - '@language'
+            - '@request'
+            - '@template'
+            - '@user'
+            - '@danieltj.api.includes.functions'
 
     danieltj.api.listener:
         class: danieltj\api\event\listener
         arguments:
-            - '@controller.helper'
+            - '@auth'
+            - '@request'
             - '@template'
+            - '@language'
+            - '@user'
+            - '@danieltj.api.includes.functions'
         tags:
             - { name: event.listener }
+
+    danieltj.api.includes.functions:
+        class: danieltj\api\includes\functions
+        arguments:
+            - '@auth'
+            - '@dbal.conn'
