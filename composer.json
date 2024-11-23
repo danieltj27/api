@@ -16,7 +16,7 @@
 		"phpbb/phpbb": ">=3.3.0"
 	},
 	"extra": {
-		"display-name": "API",
+		"display-name": "API for phpBB",
 		"soft-require": {
 			"phpbb/phpbb": ">=3.3.14"
 		}
