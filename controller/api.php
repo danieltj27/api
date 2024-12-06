@@ -14,7 +14,7 @@ use phpbb\template\template;
 use phpbb\language\language;
 use phpbb\user;
 use danieltj\api\includes\functions;
-use \Symfony\Component\HttpFoundation\Request as Request;
+use \Symfony\Component\HttpFoundation\Request as HttpRequest;
 use \Symfony\Component\HttpFoundation\Response as Response;
 use \Symfony\Component\HttpFoundation\JsonResponse as JsonResponse;
 
